@@ -6,7 +6,7 @@ This client was created as an example to help programmers to get to grips with t
 
 ## PREFACE
 
-If you are familler with Godot, you should be familler with the Godot Scene Tree where you add and remove all kinds of Nodes. Networking is no different, you create nodes that represent Users and then add them to an essentially Mega-Scene Tree containing every user shared by every user. This tutorial does not cover everything (like master, slave and rpc_id functions). It does cover basics, sync and remote functions.  
+If you are familler with Godot, you should be familler with the Godot Scene Tree where you add and remove all kinds of Nodes. Networking is no different, you create nodes that represent Users and then add them to what is essentially a Mega-Scene Tree containing every user shared by every user. This tutorial does not cover everything (like master, slave and rpc_id functions). It does cover basics, sync and remote functions.  
 
 ## SETUP
 
@@ -38,7 +38,29 @@ A Simple container with four items set to fill, expand with a custom constant of
 
 This is where users will write their message. Messages are sent on the press of an Enter Key.
 
-HOSTING AND CONNECTING:
+#### NETWORKING
+
+onready var IP_Address = $Connection_Buttons/IP_Address
+onready var Port = $Connection_Buttons/Port
+const MAX_USERS = 1
+var player_id
+
+Before networking, we set up some basics. The first two onready variables here should be self explantory, we're just creating tidier paths to our user input variables. 
+
+The const MAX_USERS limits the chat room to the server + 1 client. Godot's High Level Networking defaults to 100 Max Users. When this number is reached, the server refuses new connections automatically.
+
+In Godot Networking, each user (or peer) has an ID. The Server is always '1' unless otherwise stated. Other users are some combination of random numbers. This ID Helps the Network understand where you want to send a message (say you wanted to PM/DM somebody on the chat client and not have others see, you would use their ID with the rpc_id function). However here we are simply using it as a Player Identifier to see who is saying what, in place of usernames.
+
+#### HOSTING AS SERVER
+
+func _on_Listen_pressed():
+	var peer = NetworkedMultiplayerENet.new()
+	peer.create_server(int(Port.text), MAX_USERS)
+	get_tree().set_network_peer(peer)
+	player_id = str(get_tree().get_network_unique_id())
+  
+In this example, I've attached the '_pressed()' signal from the listen button (previously shown in the scene tree)
+
 
 INBUILT SIGNALS:
 
