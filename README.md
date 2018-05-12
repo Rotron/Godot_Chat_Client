@@ -2,7 +2,7 @@ Godot Chat Client.
 
 This client was created as an example to help programmers to get to grips with the basics of the High Level Networking module in the Godot Game Engine. The following is a brief tutorial. 
 
-![alt text](https://raw.githubusercontent.com/godotengine/godot/master/icon.png)
+![alt_text](https://i.imgur.com/bUvuAiF.png)
 
 ## PREFACE
 
@@ -73,4 +73,26 @@ The remote keyword means 'When a User invokes this function, execute it on all _
 The second connected signal is called when a User leaves the Server. The peer is removed from the shared Scene Trees, so this will trigger on all connected users. 
 
 #### SENDING AND RECEIVING MESSAGES
+
+Finally, what is a chat client without chatting? 
+
+When a user has written a message they want to send and hit enter, the message_input node will emit a signal that text has been entered which will trigger the '_on_Message_Input_text_entered(new_text)' function with the new_text being the previous text. 
+
+![alt_text](https://i.imgur.com/vof08rj.png)
+
+The first part of this function will clear the message input text, this is for convience sake so users don't have to constantly press backspace when entering a message. 
+
+The second part of this function sends executes an RPC call to 'display_message', while passing in the message (new_text) as well as the ID of the person who sent it. 
+
+![alt_text](https://i.imgur.com/WVbE6bJ.png)
+
+Note the 'Sync' keyword here. Sync means almost exactly the same thing as the Remote keyword EXCEPT that it also happens on the user who called it, as well as everyone else. 
+
+Also note that we are using += and not + or = by themselves. If we used +, the text wouldn't actually be updated. If we used just =, then we would be changing the text to the newest sent message everytime. Essentially deleting all of the old messages, which is not desirable in a chat client. 
+
+# CONCLUSION
+
+This was the most brief I could manage to help you understand the absolute basics of Godot Networking. With that brevity, I lacked the ability to be more comprehensive but the High Level Networking tutorial at the Godot Official Doc's is more than worthwhile to check out, especially if you've got the basic gist of it from this. 
+
+If you enjoyed this article or have criticisims on it, feel free to poke me on the official Godot Discord where I go by the same name as here. Thank you for your time.
 
