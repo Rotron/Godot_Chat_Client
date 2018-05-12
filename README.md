@@ -58,9 +58,8 @@ func _on_Listen_pressed():
 	peer.create_server(int(Port.text), MAX_USERS)
 	get_tree().set_network_peer(peer)
 	player_id = str(get_tree().get_network_unique_id())
-  
-In this example, I've attached the '_pressed()' signal from the listen button (previously shown in the scene tree)
 
+This function is connected to the _pressed() signal of the Listen Button.
 
 INBUILT SIGNALS:
 
