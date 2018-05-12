@@ -14,36 +14,13 @@ Before taking a look at the code we will run through the Scene Tree set up here.
 
 ![alt_text](https://imgur.com/XlFdhRQ.png)
 
-Seeing as this is a tutorial, I've tried to keep things as simple as possible. I'll run through each of these quickly.
-
-#### MAIN
-
-A Simple Node for the root, that stores all of the code functionality. 
-
-#### BACKGROUND_PANEL
-
-A Simple Panel for the Chat Background. 
+Seeing as this is a tutorial, I've tried to keep things as simple as possible. All of our code is stored in the script of the root main. The rest of this chat is just a layout I designed. Don't feel pressured to follow along too much.
 
 Note: I'm using a Label to display chat text so that the only scrolling is vertical. I would be using Multi-Line Edit but as of writing it forces horizontal scrolling which is inconvienent for a chat program.
 
-#### DISPLAY
-
-A Simple RichTextLabel to display discussion in the chat
-
-#### CONNECTION_BUTTONS
-
-A Simple container with four items set to fill, expand with a custom constant of no horizontal seperation to look tidy. Inside this, we have four items: Connect, Listen, IP and Port. These will be explained with code.
-
-#### MESSAGE_INPUT
-
-This is where users will write their message. Messages are sent on the press of an Enter Key.
-
 #### NETWORKING
 
-onready var IP_Address = $Connection_Buttons/IP_Address
-onready var Port = $Connection_Buttons/Port
-const MAX_USERS = 1
-var player_id
+![alt_text](https://i.imgur.com/3P086Tr.png)
 
 Before networking, we set up some basics. The first two onready variables here should be self explantory, we're just creating tidier paths to our user input variables. 
 
@@ -91,9 +68,8 @@ Note the remote keyword. To call a function from another User, those functions m
 
 The remote keyword means 'When a User invokes this function, execute it on all __OTHER users, the user in this case already knows he has connected due to the confirmation sent before the Remote Procedure Call. 
 
-func _player_disconnected(id):
-	$Display.text += '\n ' + str(id) + ' has left'
-	
+![alt_text](https://i.imgur.com/UkbiAVZ.png)
+
 The second connected signal is called when a User leaves the Server. The peer is removed from the shared Scene Trees, so this will trigger on all connected users. 
 
 #### SENDING AND RECEIVING MESSAGES
