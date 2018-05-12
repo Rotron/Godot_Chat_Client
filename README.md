@@ -24,7 +24,7 @@ Note: I'm using a Label to display chat text so that the only scrolling is verti
 
 Before networking, we set up some basics. The first two onready variables here should be self explantory, we're just creating tidier paths to our user input variables. 
 
-The const MAX_USERS limits the chat room to the server + 1 client. Godot's High Level Networking defaults to 100 Max Users. When this number is reached, the server refuses new connections automatically.
+The const MAX_USERS limits the chat room to the server + 1 client. Godot's High Level Networking defaults to 32 Max Users (but you can go past this if you'd like). When this number is reached, the server refuses new connections automatically.
 
 In Godot Networking, each user (or peer) has an ID. The Server is always '1' unless otherwise stated. Other users are some combination of random numbers. This ID Helps the Network understand where you want to send a message (say you wanted to PM/DM somebody on the chat client and not have others see, you would use their ID with the rpc_id function). However here we are simply using it as a Player Identifier to see who is saying what, in place of usernames.
 
