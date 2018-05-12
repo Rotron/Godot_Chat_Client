@@ -77,9 +77,7 @@ Connecting as the Client is not a huge deal different from Connecting as the Ser
 
 #### SIGNALS
 
-func _ready():
-	get_tree().connect("connected_to_server", self, "_connected_ok")
-	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
+![alt_text](https://i.imgur.com/sgXtq0M.png)
 	
 func _connected_ok():
 	$Display.text += '\n You have joined the room'
