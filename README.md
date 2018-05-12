@@ -66,7 +66,7 @@ The second thing it does is send out a RPC or a 'Remote Procedural Call'. An RPC
 
 Note the remote keyword. To call a function from another User, those functions must be authorized for that call. 'Remote', 'Sync', and 'Slave' are three keywords that authorize those calls in one way or another. Without any of those, you wouldn't be able to call the function at all from a different computer (with some exception for built-in functions).
 
-The remote keyword means 'When a User invokes this function, execute it on all __OTHER users, the user in this case already knows he has connected due to the confirmation sent before the Remote Procedure Call. 
+The remote keyword means 'When a User invokes this function, execute it on all _OTHER users, the user in this case already knows he has connected due to the confirmation sent before the Remote Procedure Call. 
 
 ![alt_text](https://i.imgur.com/UkbiAVZ.png)
 
