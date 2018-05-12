@@ -16,17 +16,27 @@ Before taking a look at the code we will run through the Scene Tree set up here.
 
 Seeing as this is a tutorial, I've tried to keep things as simple as possible. I'll run through each of these quickly.
 
-MAIN: A Simple Node for the root, that stores all of the code functionality. 
+# MAIN: 
 
-BACKGROUND_PANEL: A Simple Panel for the Chat Background. 
+A Simple Node for the root, that stores all of the code functionality. 
+
+# BACKGROUND_PANEL: 
+
+A Simple Panel for the Chat Background. 
 
 Note: I'm using a Label to display chat text so that the only scrolling is vertical. I would be using Multi-Line Edit but as of writing it forces horizontal scrolling which is inconvienent for a chat program.
 
-DISPLAY: A Simple RichTextLabel to display discussion in the chat
+# DISPLAY: 
 
-CONNECTION_BUTTONS: A Simple container with four items set to fill, expand with a custom constant of no horizontal seperation to look tidy. Inside this, we have four items: Connect, Listen, IP and Port. These will be explained with code.
+A Simple RichTextLabel to display discussion in the chat
 
-MESSAGE_INPUT: This is where users will write their message. Messages are sent on the press of an Enter Key.
+# CONNECTION_BUTTONS: 
+
+A Simple container with four items set to fill, expand with a custom constant of no horizontal seperation to look tidy. Inside this, we have four items: Connect, Listen, IP and Port. These will be explained with code.
+
+# MESSAGE_INPUT: 
+
+This is where users will write their message. Messages are sent on the press of an Enter Key.
 
 HOSTING AND CONNECTING:
 
