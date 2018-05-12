@@ -59,8 +59,51 @@ func _on_Listen_pressed():
 	get_tree().set_network_peer(peer)
 	player_id = str(get_tree().get_network_unique_id())
 
-This function is connected to the _pressed() signal of the Listen Button.
+This function is connected to the _pressed() signal of the Listen Button. 
 
-INBUILT SIGNALS:
+In the first line, we've created a 'Peer' node which is essentially an empty node that will represent one of the users on the Scene Tree
 
-MESSAGE DISPLAYS REMOTE VS SYNC
+In the second line, we've choosen to set this Peer as the Server, then fill in related details (which port we're hosting it on, and how many additional users can join). Take note that we're grabbing the text from the Port (which is just a shorter name for the $Connection_Buttons/Port node and then converting it to an integer.
+
+In the third line, notice the 'get_tree()'. Here we are adding the newly defined server node to the Scene Tree. Just like we would do with any old Godot Node. 
+
+The fourth line is something that I've wrote for convience. We get the node's network ID and set it to our player_id (in this case, we are the server, so we will have an id of '1'. 
+
+#### CONNECTING AS CLIENT
+
+# CLIENT VERSION
+
+Connecting as the Client is not a huge deal different from Connecting as the Server. In line two, we aren't the server, so we don't need to set the rules on how many users are allowed. Instead we point our Client at the right IP Address and Port so we don't get lost on our way on the information highway. 
+
+#### SIGNALS
+
+func _ready():
+	get_tree().connect("connected_to_server", self, "_connected_ok")
+	get_tree().connect("network_peer_disconnected", self, "_player_disconnected")
+	
+func _connected_ok():
+	$Display.text += '\n You have joined the room'
+	rpc('announce_user', player_id)
+	
+The Scene Tree has a number of built-in signals when it comes to Networking. In this case, I've decided to only use two to keep things simple. 
+
+The first signal "connected_to_the_server" is triggered on a Client when it has successfully connected to the server. It won't trigger on the server ever (because of course you've connected if you're the server!). 
+
+When the client has successfully connected, the connected_to_server signal will trigger the _connected_ok function. Which first adds a confirmation for the client that they have successfully connected to the room. 
+
+The second thing it does is send out a RPC or a 'Remote Procedural Call'. An RPC is really just another function call, except it can call functions from scene trees on connected computers. The first part of the RPC is the name of the function you want to call on another connected user. In this case, 'announce_user', the second part are any arguments you want to send, in this case the connected player's ID. 
+
+remote func announce_user(player):
+	$Display.text += '\n ' + player + ' has joined the room' 
+
+Note the remote keyword. To call a function from another User, those functions must be authorized for that call. 'Remote', 'Sync', and 'Slave' are three keywords that authorize those calls in one way or another. Without any of those, you wouldn't be able to call the function at all from a different computer (with some exception for built-in functions).
+
+The remote keyword means 'When a User invokes this function, execute it on all __OTHER users, the user in this case already knows he has connected due to the confirmation sent before the Remote Procedure Call. 
+
+func _player_disconnected(id):
+	$Display.text += '\n ' + str(id) + ' has left'
+	
+The second connected signal is called when a User leaves the Server. The peer is removed from the shared Scene Trees, so this will trigger on all connected users. 
+
+#### SENDING AND RECEIVING MESSAGES
+
