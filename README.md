@@ -1,4 +1,4 @@
-Godot Chat Client. 
+# A Basic Tutorial on this Godot Chat Client. 
 
 This client was created as an example to help programmers to get to grips with the basics of the High Level Networking module in the Godot Game Engine. The following is a brief tutorial. 
 
