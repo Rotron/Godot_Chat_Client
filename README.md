@@ -12,7 +12,7 @@ SETUP:
 
 Before taking a look at the code we will run through the Scene Tree set up here.
 
-![alt_text](https://imgur.com/XlFdhRQ)
+![alt_text](https://imgur.com/XlFdhRQ.png)
 
 Seeing as this is a tutorial, I've tried to keep things as simple as possible. I'll run through each of these quickly.
 
