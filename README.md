@@ -53,11 +53,7 @@ In Godot Networking, each user (or peer) has an ID. The Server is always '1' unl
 
 #### HOSTING AS SERVER
 
-func _on_Listen_pressed():
-	var peer = NetworkedMultiplayerENet.new()
-	peer.create_server(int(Port.text), MAX_USERS)
-	get_tree().set_network_peer(peer)
-	player_id = str(get_tree().get_network_unique_id())
+![alt_text](https://i.imgur.com/SncdECk.png)
 
 This function is connected to the _pressed() signal of the Listen Button. 
 
@@ -71,28 +67,25 @@ The fourth line is something that I've wrote for convience. We get the node's ne
 
 #### CONNECTING AS CLIENT
 
-# CLIENT VERSION
+![alt_text](https://i.imgur.com/kmEHKxq.png)
 
 Connecting as the Client is not a huge deal different from Connecting as the Server. In line two, we aren't the server, so we don't need to set the rules on how many users are allowed. Instead we point our Client at the right IP Address and Port so we don't get lost on our way on the information highway. 
 
 #### SIGNALS
 
 ![alt_text](https://i.imgur.com/sgXtq0M.png)
-	
-func _connected_ok():
-	$Display.text += '\n You have joined the room'
-	rpc('announce_user', player_id)
-	
+
 The Scene Tree has a number of built-in signals when it comes to Networking. In this case, I've decided to only use two to keep things simple. 
 
 The first signal "connected_to_the_server" is triggered on a Client when it has successfully connected to the server. It won't trigger on the server ever (because of course you've connected if you're the server!). 
+
+![alt_text](https://i.imgur.com/XMUy3k9.png)
 
 When the client has successfully connected, the connected_to_server signal will trigger the _connected_ok function. Which first adds a confirmation for the client that they have successfully connected to the room. 
 
 The second thing it does is send out a RPC or a 'Remote Procedural Call'. An RPC is really just another function call, except it can call functions from scene trees on connected computers. The first part of the RPC is the name of the function you want to call on another connected user. In this case, 'announce_user', the second part are any arguments you want to send, in this case the connected player's ID. 
 
-remote func announce_user(player):
-	$Display.text += '\n ' + player + ' has joined the room' 
+![alt_text](https://i.imgur.com/2HigHOF.png)
 
 Note the remote keyword. To call a function from another User, those functions must be authorized for that call. 'Remote', 'Sync', and 'Slave' are three keywords that authorize those calls in one way or another. Without any of those, you wouldn't be able to call the function at all from a different computer (with some exception for built-in functions).
 
